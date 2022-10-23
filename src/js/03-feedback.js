@@ -30,16 +30,27 @@ refForm.addEventListener(
   }, 500)
 );
 
-refForm.addEventListener('submit', event => {
-  event.preventDefault();
-  console.log(
-    `Emai: ${refForm.email.value} \nMessage: ${refForm.message.value}`
-  );
-  localStorage.removeItem(KEY_FEEDBACK_FORM);
-  initialFormData({ email: '', message: '' });
-});
+refForm.addEventListener('submit', handleSubmit);
 
 function initialFormData(objData) {
-  refForm.email.value = objData.email;
-  refForm.message.value = objData.message;
+  for (key in objData) {
+    if (objData[key] && refForm[key]) {
+      refForm[key].value = objData[key];
+    }
+  }
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  const {
+    elements: { email, message },
+  } = event.currentTarget;
+
+  if (email.value === '' || message.value === '') {
+    return console.log('Please fill in all the fields!');
+  }
+
+  console.log(`Email: ${email.value} \nMessage: ${message.value}`);
+  event.currentTarget.reset();
+  localStorage.removeItem(KEY_FEEDBACK_FORM);
 }
