@@ -33,7 +33,7 @@ refForm.addEventListener(
 refForm.addEventListener('submit', handleSubmit);
 
 function initialFormData(objData) {
-  for (const key in objData) {
+  for (let key in objData) {
     if (objData[key] && refForm[key]) {
       refForm[key].value = objData[key];
     }
