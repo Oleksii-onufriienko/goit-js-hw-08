@@ -32,7 +32,9 @@ refForm.addEventListener(
 
 refForm.addEventListener('submit', event => {
   event.preventDefault();
-  console.log(currentFields);
+  console.log(
+    `Emai: ${refForm.email.value} \nMessage: ${refForm.message.value}`
+  );
   localStorage.removeItem(KEY_FEEDBACK_FORM);
   initialFormData({ email: '', message: '' });
 });
